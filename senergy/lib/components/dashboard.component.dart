@@ -8,15 +8,15 @@
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 
-class AreaAndLineChart extends StatelessWidget {
+class SimpleTimeSeriesChart extends StatelessWidget {
   final List<charts.Series> seriesList;
   final bool animate;
 
-  AreaAndLineChart(this.seriesList, {this.animate});
+  SimpleTimeSeriesChart(this.seriesList, {this.animate});
 
   /// Creates a [TimeSeriesChart] with sample data and no transition.
-  factory AreaAndLineChart.withSampleData() {
-    return new AreaAndLineChart(
+  factory SimpleTimeSeriesChart.withSampleData() {
+    return new SimpleTimeSeriesChart(
       _createSampleData(),
       // Disable animations for image tests.
       animate: false,
@@ -25,21 +25,35 @@ class AreaAndLineChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new charts.LineChart(seriesList,
-        animate: animate,
-        customSeriesRenderers: [
-          new charts.LineRendererConfig(
-              // ID used to link series to this renderer.
-              customRendererId: 'customArea',
-              includeArea: true,
-              stacked: true),
-        ]);
+    return new charts.TimeSeriesChart(
+      seriesList,
+      animate: animate,
+      customSeriesRenderers: [
+        new charts.LineRendererConfig(
+            // ID used to link series to this renderer.
+            customRendererId: 'customArea',
+            includePoints: true,
+            includeArea: true,
+            stacked: true),
+      ],
+      domainAxis: charts.DateTimeAxisSpec(
+        tickFormatterSpec: charts.AutoDateTimeTickFormatterSpec(
+          // day: charts.TimeFormatterSpec(
+          //   format: 'EEE',
+          //   transitionFormat: 'EEE',
+          // ),
+          month: charts.TimeFormatterSpec(
+            format: 'MMM',
+            transitionFormat: 'MMM' 
+          )
+        ),
+      ),
+    );
   }
 
   /// Create one series with sample hard coded data.
-  static List<charts.Series<TimeSeriesSales, int>> _createSampleData() {
+  static List<charts.Series<TimeSeriesSales, DateTime>> _createSampleData() {
     final orcado = [
-      new TimeSeriesSales(new DateTime(2021, 1, 1), 50),
       new TimeSeriesSales(new DateTime(2021, 2, 1), 40),
       new TimeSeriesSales(new DateTime(2021, 3, 1), 70),
       new TimeSeriesSales(new DateTime(2021, 4, 1), 60),
@@ -52,7 +66,6 @@ class AreaAndLineChart extends StatelessWidget {
     ];
 
     final realizado = [
-      new TimeSeriesSales(new DateTime(2021, 1, 1), 10 + 50),
       new TimeSeriesSales(new DateTime(2021, 2, 1), 10 + 40),
       new TimeSeriesSales(new DateTime(2021, 3, 1), 0 + 70),
       new TimeSeriesSales(new DateTime(2021, 4, 1), 10 + 60),
@@ -65,19 +78,20 @@ class AreaAndLineChart extends StatelessWidget {
     ];
 
     return [
-      new charts.Series<TimeSeriesSales, int>(
+      new charts.Series<TimeSeriesSales, DateTime>(
         id: 'Desktop',
         colorFn: (_, __) => charts.MaterialPalette.yellow.shadeDefault,
-        domainFn: (TimeSeriesSales sales, _) => sales.time.month,
+        domainFn: (TimeSeriesSales sales, _) => sales.time,
         measureFn: (TimeSeriesSales sales, _) => sales.sales,
         data: orcado,
       )
         // Configure our custom bar target renderer for this series.
         ..setAttribute(charts.rendererIdKey, 'customArea'),
-      new charts.Series<TimeSeriesSales, int>(
+      new charts.Series<TimeSeriesSales, DateTime>(
         id: 'Tablet',
         colorFn: (_, __) => charts.MaterialPalette.gray.shade300,
-        domainFn: (TimeSeriesSales sales, _) => sales.time.month,
+        seriesColor: charts.MaterialPalette.red.shadeDefault,
+        domainFn: (TimeSeriesSales sales, _) => sales.time,
         measureFn: (TimeSeriesSales sales, _) => sales.sales,
         data: realizado,
       ),
