@@ -27,50 +27,48 @@ class _HomeScreenState extends State<HomeScreen> {
           case 0:
             return CupertinoTabView(
               navigatorKey: firstTabNavKey,
-              builder: (BuildContext context) => MyFirstTab(),
+              builder: (BuildContext context) => DashboardView(),
             );
             break;
           case 1:
             return CupertinoTabView(
               navigatorKey: secondTabNavKey,
-              builder: (BuildContext context) => MySecondTab(),
+              builder: (BuildContext context) => DevelopmentTab(),
             );
             break;
           case 2:
             return CupertinoTabView(
               navigatorKey: thirdTabNavKey,
-              builder: (BuildContext context) => MyThirdTab(),
+              builder: (BuildContext context) => DevelopmentTab(),
             );
             break;
           case 3:
             return CupertinoTabView(
               navigatorKey: fourthTabNavKey,
-              builder: (BuildContext context) => MySecondTab(),
+              builder: (BuildContext context) => DevelopmentTab(),
             );
             break;
         }
 
         return CupertinoTabView(
           navigatorKey: fourthTabNavKey,
-          builder: (BuildContext context) => MyFirstTab(),
+          builder: (BuildContext context) => DashboardView(),
         );
       },
     );
   }
 }
 
-class MyFirstTab extends StatelessWidget {
+class DashboardView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
         backgroundColor: Colors.transparent,
         leading: CircleAvatar(
-          backgroundColor: Colors.brown.shade800,
-          child: const Text('AH'),
-        ),
-        trailing: FlutterLogo(),
+            backgroundColor: Colors.brown.shade800, child: const Text('AH')),
         middle: FlutterLogo(),
+        trailing: Icon(Icons.search, color: Colors.grey),
       ),
       child: ListView(
         padding: EdgeInsets.fromLTRB(
@@ -218,26 +216,121 @@ class MyFirstTab extends StatelessWidget {
               ),
             ],
           ),
+           Row(
+            children: [
+              Card(
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  side: BorderSide(
+                    width: 2,
+                    color: Color(0xFFDFE0EB),
+                  ),
+                ),
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.44,
+                  height: MediaQuery.of(context).size.width * 0.35,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Dispositivos Ativos',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey.shade400,
+                            fontSize: 22),
+                      ),
+                      SizedBox(height: 5),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            '5',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                                fontSize: 25),
+                          ),
+                          Text(
+                            '/7',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey.shade400,
+                                fontSize: 20),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(width: 12),
+              Card(
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  side: BorderSide(
+                    width: 2,
+                    color: Color(0xFFDFE0EB),
+                  ),
+                ),
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width * 0.43,
+                  height: MediaQuery.of(context).size.width * 0.35,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Ambientes Ativos',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey.shade400,
+                            fontSize: 24),
+                      ),
+                      SizedBox(height: 5),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment
+                            .center, //Center Row contents horizontally,
+                        children: [
+                          Text(
+                            '5',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                                fontSize: 25),
+                          ),
+                          Text(
+                            '/7',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey.shade400,
+                                fontSize: 20),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     );
   }
 }
 
-class MySecondTab extends StatelessWidget {
+class DevelopmentTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
       color: Colors.greenAccent,
-    );
-  }
-}
-
-class MyThirdTab extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.blue,
     );
   }
 }
