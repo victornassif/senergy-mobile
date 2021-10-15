@@ -72,7 +72,7 @@ class DashboardView extends StatelessWidget {
       ),
       child: ListView(
         padding: EdgeInsets.fromLTRB(
-            10, MediaQuery.of(context).size.height * 0.13, 10, 0),
+            10, MediaQuery.of(context).size.height * 0.13, 10, 50),
         children: [
           Card(
             elevation: 0,
@@ -216,7 +216,7 @@ class DashboardView extends StatelessWidget {
               ),
             ],
           ),
-           Row(
+          Row(
             children: [
               Card(
                 elevation: 0,
@@ -234,7 +234,7 @@ class DashboardView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Dispositivos Ativos',
+                        'Estimativa de economia',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -246,20 +246,20 @@ class DashboardView extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            '5',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                                fontSize: 25),
-                          ),
-                          Text(
-                            '/7',
+                            'R\$',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.grey.shade400,
                                 fontSize: 20),
+                          ),
+                          Text(
+                            '167,73',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                                fontSize: 25),
                           ),
                         ],
                       ),
@@ -284,35 +284,36 @@ class DashboardView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Ambientes Ativos',
+                        'Maior consumo',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.grey.shade400,
                             fontSize: 24),
                       ),
-                      SizedBox(height: 5),
+                      SizedBox(height: 3),
                       Row(
                         mainAxisAlignment: MainAxisAlignment
                             .center, //Center Row contents horizontally,
                         children: [
                           Text(
-                            '5',
+                            'Quarto do Artur',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black,
-                                fontSize: 25),
-                          ),
-                          Text(
-                            '/7',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.grey.shade400,
-                                fontSize: 20),
-                          ),
+                                fontSize: 15),
+                          )
                         ],
+                      ),
+                      SizedBox(height: 4),
+                      Text(
+                        '1537 KW',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey.shade400,
+                            fontSize: 13),
                       ),
                     ],
                   ),
@@ -330,7 +331,49 @@ class DevelopmentTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.greenAccent,
-    );
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: [
+              Colors.white,
+              Color(0xFFFFDB00),
+            ],
+          ),
+        ),
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(
+              10, MediaQuery.of(context).size.height * 0.40, 10, 10),
+          child: Column(
+            children: [
+              Icon(
+                Icons.delivery_dining_outlined,
+                size: 50,
+                color: Colors.black,
+              ),
+              Text(
+                'A nosso aplicativo está em desenvolvimento!',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 19,
+                ),
+              ),
+              SizedBox(height: 5),
+              Text(
+                'Ainda existe muito por vir',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ),
+              SizedBox(height: 5),
+              Text(
+                '#beSenergy',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+        ));
   }
 }
