@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:senergy/components/dashboard.component.dart';
 
 import '../main.dart';
 
@@ -105,7 +104,7 @@ class DashboardView extends StatelessWidget {
                   Container(
                     height: MediaQuery.of(context).size.height * 0.55,
                     width: MediaQuery.of(context).size.width * 0.95,
-                    child: SimpleTimeSeriesChart.withSampleData(),
+                    // child: SimpleTimeSeriesChart.withSampleData(),
                   ),
                 ],
               ),
