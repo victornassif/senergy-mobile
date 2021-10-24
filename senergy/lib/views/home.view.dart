@@ -336,7 +336,7 @@ class DevelopmentTab extends StatelessWidget {
             end: Alignment.bottomLeft,
             colors: [
               Colors.white,
-              Color(0xFFFFDB00),
+              Theme.of(context).accentColor,
             ],
           ),
         ),

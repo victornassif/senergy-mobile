@@ -42,49 +42,49 @@ class SpentChart extends StatelessWidget {
                     return FlLine(color: Colors.grey.shade200);
                   },
                 ),
-                maxX: 11,
+                maxX: 12,
+                minX: 1,
                 maxY: 6,
-                minX: 0,
                 minY: 0,
                 titlesData: LineTitles.getTitleData(),
                 borderData: FlBorderData(show: true, border: Border()),
                 lineBarsData: [
                   LineChartBarData(
                     spots: [
-                      FlSpot(0, 3),
-                      FlSpot(2.6, 2),
-                      FlSpot(4.9, 5),
-                      FlSpot(6.8, 2.5),
+                      FlSpot(1, 3),
+                      FlSpot(3, 2),
+                      FlSpot(5, 5),
+                      FlSpot(7, 2.5),
                       FlSpot(8, 4),
-                      FlSpot(9.5, 3),
+                      FlSpot(10, 3),
                       FlSpot(11, 4),
                     ],
                     isCurved: true,
                     colors: [
-                      Color(0xffFFDB00),
+                      Theme.of(context).accentColor,
                     ],
                     barWidth: 3,
                     belowBarData: BarAreaData(
                       show: true,
-                      colors: [Color(0xffFFDB00), Colors.white]
+                      colors: [
+                        Colors.white70,
+                        Theme.of(context).accentColor,
+                      ]
                           .map(
-                            (e) => e.withOpacity(0.2),
+                            (e) => e.withOpacity(0.3),
                           )
                           .toList(),
                     ),
-                    // dotData: FlDotData(
-                      
-                    //   getStrokeColor: (a,b,c){
-                    //     return Color(0xffFFDB00);
-                    //   },
-                    //   getDotColor: (a, b, c) {
-                    //     return Colors.white;
-                    //   },
-                    // ),
+                    dotData: FlDotData(getDotPainter: (spot, value, line, i) {
+                      return FlDotCirclePainter(
+                        color: Colors.white,
+                        strokeColor: Theme.of(context).accentColor,
+                        strokeWidth: 3,
+                      );
+                    }),
                   ),
                 ],
               ),
-              swapAnimationDuration: Duration(milliseconds: 150), // Optional
             ),
           ),
         ],

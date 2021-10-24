@@ -30,6 +30,7 @@ ThemeData theme() {
     primaryColor: primaryColor,
     canvasColor: secondColor,
     primarySwatch: kPrimaryColor,
+    accentColor: Color(0xffFFDB00),
     scaffoldBackgroundColor: Colors.white,
     visualDensity: VisualDensity.adaptivePlatformDensity,
   );

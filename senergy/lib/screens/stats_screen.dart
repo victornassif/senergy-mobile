@@ -21,7 +21,7 @@ class _StatsScreenState extends State<StatsScreen> {
         slivers: <Widget>[
           _buildStatsTabBar(),
           SliverPadding(
-            padding: const EdgeInsets.symmetric(horizontal: 4.0),
+            padding: const EdgeInsets.symmetric(horizontal: 12.0),
             sliver: SliverToBoxAdapter(
               child: StatsGrid(),
             ),
@@ -33,22 +33,6 @@ class _StatsScreenState extends State<StatsScreen> {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  SliverPadding _buildHeader() {
-    return SliverPadding(
-      padding: const EdgeInsets.all(20.0),
-      sliver: SliverToBoxAdapter(
-        child: Text(
-          '',
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 25.0,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
       ),
     );
   }

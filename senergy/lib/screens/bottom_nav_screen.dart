@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:senergy/screens/enviroments_screen.dart';
 import 'package:senergy/screens/stats_screen.dart';
 import 'package:senergy/screens/profile_screen.dart';
-import 'package:senergy/screens/sensor_detail.dart';
+import 'package:senergy/screens/sensor_detail_screen.dart';
 
 class BottomNavScreen extends StatefulWidget {
   @override
@@ -12,6 +13,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
   final List _screens = [
     StatsScreen(),
     SensorDetail(),
+    EnviromentScreen(),
     ProfileScreen(),
   ];
   int _currentIndex = 0;
@@ -30,27 +32,34 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
           selectedItemColor: Colors.white,
           unselectedItemColor: Colors.grey,
           elevation: 0.0,
-          items: [Icons.insert_chart, Icons.list_alt_rounded, Icons.person]
+          items: [
+            Icons.insert_chart,
+            Icons.list_alt_rounded,
+            Icons.living_outlined,
+            Icons.person
+          ]
               .asMap()
-              .map((key, value) => MapEntry(
-                    key,
-                    BottomNavigationBarItem(
-                      label: "",
-                      icon: Container(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 6.0,
-                          horizontal: 16.0,
-                        ),
-                        decoration: BoxDecoration(
-                          color: _currentIndex == key
-                              ? Colors.blue[600]
-                              : Colors.transparent,
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        child: Icon(value),
+              .map(
+                (key, value) => MapEntry(
+                  key,
+                  BottomNavigationBarItem(
+                    label: "",
+                    icon: Container(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 6.0,
+                        horizontal: 16.0,
                       ),
+                      decoration: BoxDecoration(
+                        color: _currentIndex == key
+                            ? Theme.of(context).primaryColor
+                            : Colors.transparent,
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      child: Icon(value),
                     ),
-                  ))
+                  ),
+                ),
+              )
               .values
               .toList(),
         ));

@@ -14,14 +14,14 @@ class StatsGrid extends StatelessWidget {
                   '12,73',
                   'Gasto em reais',
                   'R\$',
-                  Colors.white,
+                  Colors.yellow[300],
                   Theme.of(context).primaryColor,
                 ),
                 _buildStatCardkwh(
                   '120',
                   'Gasto em kWh',
                   'kWh',
-                  Colors.white,
+                  Colors.yellow[300],
                   Theme.of(context).primaryColor,
                 ),
               ],
@@ -51,7 +51,7 @@ class StatsGrid extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: Colors.grey.shade400,
+                color: Colors.black,
                 fontSize: 18,
               ),
             ),
@@ -70,7 +70,7 @@ class StatsGrid extends StatelessWidget {
                   Text(
                     count,
                     style: TextStyle(
-                      color: colorText,
+                      color:  Colors.black,
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
                     ),
@@ -103,7 +103,7 @@ class StatsGrid extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: Colors.grey.shade400,
+                color: Colors.black,
                 fontSize: 18,
               ),
             ),
