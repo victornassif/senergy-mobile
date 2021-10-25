@@ -17,11 +17,8 @@ class EnviromentScreen extends StatelessWidget {
         itemCount: enviromentsData.length,
         itemBuilder: (context, index) {
           return Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(21),
-            ),
-            
             child: EnviromentListTile.getListTile(
+              context,
               enviromentsData[index],
             ),
           );

@@ -28,8 +28,12 @@ ThemeData theme() {
   return ThemeData(
     brightness: brightness,
     primaryColor: primaryColor,
-    canvasColor: secondColor,
     primarySwatch: kPrimaryColor,
+    cardTheme: CardTheme(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(8))
+      )
+    ),
     accentColor: Color(0xffFFDB00),
     scaffoldBackgroundColor: Colors.white,
     visualDensity: VisualDensity.adaptivePlatformDensity,

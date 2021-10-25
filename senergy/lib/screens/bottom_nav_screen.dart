@@ -33,17 +33,17 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
           unselectedItemColor: Colors.grey,
           elevation: 0.0,
           items: [
-            Icons.insert_chart,
-            Icons.list_alt_rounded,
-            Icons.living_outlined,
-            Icons.person
+            [Icons.insert_chart,'Dashboard'],
+            [Icons.list_alt_rounded,'Sensores'],
+            [Icons.living_outlined,'Ambientes'],
+            [Icons.person,'Perfil']
           ]
               .asMap()
               .map(
                 (key, value) => MapEntry(
                   key,
                   BottomNavigationBarItem(
-                    label: "",
+                    label: value[1],
                     icon: Container(
                       padding: const EdgeInsets.symmetric(
                         vertical: 6.0,
@@ -55,7 +55,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
                             : Colors.transparent,
                         borderRadius: BorderRadius.circular(20.0),
                       ),
-                      child: Icon(value),
+                      child: Icon(value[0]),
                     ),
                   ),
                 ),
