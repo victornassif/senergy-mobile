@@ -1,16 +1,38 @@
+import 'dart:math';
+import "package:collection/collection.dart";
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:senergy/models/consumption.dart';
 import 'package:senergy/widgets/line_titles.dart';
 
 class SpentChart extends StatelessWidget {
-  final List<double> energySpent;
+  final List<Consumption> energySpent;
+  final double heightDash;
 
-  const SpentChart({@required this.energySpent});
+  const SpentChart(this.energySpent, this.heightDash);
 
   @override
   Widget build(BuildContext context) {
+    List<Consumption> consumptionList = [];
+
+    groupBy(energySpent, (Consumption c) => c.dateTime).forEach((key, value) {
+      double totalValue = 0;
+      value.forEach((element) {
+        totalValue += element.value;
+      });
+      consumptionList.add(Consumption(key, totalValue));
+    });
+
+    var spotsFromList = consumptionList.map((e) {
+      return FlSpot(double.parse(e.dateTime.day.toString()), e.valueT);
+    }).toList();
+
+    var maxSpotY = spotsFromList.map((e) {
+      return e.y;
+    }).reduce(max);
+
     return Container(
-      height: 450,
+      height: heightDash,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.only(
@@ -32,7 +54,8 @@ class SpentChart extends StatelessWidget {
             ),
           ),
           Container(
-            width: MediaQuery.of(context).size.width * 0.90,
+            width: MediaQuery.of(context).size.width * 0.95,
+            height: heightDash * 0.8,
             child: LineChart(
               LineChartData(
                 gridData: FlGridData(
@@ -42,23 +65,14 @@ class SpentChart extends StatelessWidget {
                     return FlLine(color: Colors.grey.shade200);
                   },
                 ),
-                maxX: 12,
-                minX: 1,
-                maxY: 6,
-                minY: 0,
+                maxX: 30,
+                minX: 18,
+                maxY: maxSpotY + maxSpotY * 0.7,
                 titlesData: LineTitles.getTitleData(),
                 borderData: FlBorderData(show: true, border: Border()),
                 lineBarsData: [
                   LineChartBarData(
-                    spots: [
-                      FlSpot(1, 3),
-                      FlSpot(3, 2),
-                      FlSpot(5, 5),
-                      FlSpot(7, 2.5),
-                      FlSpot(8, 4),
-                      FlSpot(10, 3),
-                      FlSpot(11, 4),
-                    ],
+                    spots: spotsFromList,
                     isCurved: true,
                     colors: [
                       Theme.of(context).accentColor,

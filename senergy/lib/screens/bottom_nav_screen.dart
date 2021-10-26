@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:senergy/screens/device_screen.dart';
 import 'package:senergy/screens/enviroments_screen.dart';
 import 'package:senergy/screens/stats_screen.dart';
 import 'package:senergy/screens/profile_screen.dart';
-import 'package:senergy/screens/sensor_detail_screen.dart';
+import 'package:senergy/screens/device_details_screen.dart';
 
 class BottomNavScreen extends StatefulWidget {
   @override
@@ -12,7 +13,7 @@ class BottomNavScreen extends StatefulWidget {
 class _BottomNavScreenState extends State<BottomNavScreen> {
   final List _screens = [
     StatsScreen(),
-    SensorDetail(),
+    DeviceScreen(),
     EnviromentScreen(),
     ProfileScreen(),
   ];

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:senergy/config/styles.dart';
 import 'package:senergy/data/data.dart';
+import 'package:senergy/models/consumption.dart';
+import 'package:senergy/models/device.dart';
+import 'package:senergy/models/enviroment.dart';
 import 'package:senergy/widgets/custom_app_bar.dart';
 import 'package:senergy/widgets/spend_chart.dart';
 import 'package:senergy/widgets/stats_grid.dart';
@@ -11,6 +14,14 @@ class StatsScreen extends StatefulWidget {
 }
 
 class _StatsScreenState extends State<StatsScreen> {
+  List<Consumption> spentList = jsonEnviroment
+      .map((e) => Enviroment.fromJson(e))
+      .toList()
+      .expand((element) => element.devices)
+      .toList()
+      .expand((element) => element.consumptionList)
+      .toList();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +40,7 @@ class _StatsScreenState extends State<StatsScreen> {
           SliverPadding(
             padding: const EdgeInsets.symmetric(horizontal: 0.0),
             sliver: SliverToBoxAdapter(
-              child: SpentChart(energySpent: energySpent),
+              child: SpentChart(spentList, 450),
             ),
           ),
         ],

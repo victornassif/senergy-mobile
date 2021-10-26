@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:senergy/models/enviroment.dart';
+import 'package:senergy/widgets/device_list_tile.dart';
 import 'package:senergy/widgets/spend_chart.dart';
 import 'package:senergy/widgets/stats_grid.dart';
 
@@ -81,24 +82,18 @@ class EnviromentDetailsScreen extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      height: 250,
+                      height: 100,
                       width: widthScreen,
-                      child: ListView(
-                        scrollDirection: Axis.vertical,
-                        children: [
-                          ListTile(
-                            title: Text('device 1'),                            
-                          ),
-                          ListTile(
-                            title: Text('device 2'),
-                          ),
-                          ListTile(
-                            title: Text('device 3'),
-                          ),
-                          ListTile(
-                            title: Text('device 4'),
-                          ),
-                        ],
+                      child: ListView.builder(
+                        itemCount: enviroment.devices.length,
+                        itemBuilder: (context, index) {
+                          return Card(
+                            child: DeviceListTile.getListTile(
+                              context,
+                              enviroment.devices[index],
+                            ),
+                          );
+                        },
                       ),
                     ),
                   ],
@@ -109,7 +104,11 @@ class EnviromentDetailsScreen extends StatelessWidget {
           SliverPadding(
             padding: EdgeInsets.only(top: 20),
             sliver: SliverToBoxAdapter(
-              child: SpentChart(energySpent: [0.2, 0.3, 1.2].toList()),
+              child: SpentChart(
+                  enviroment.devices
+                      .expand((element) => element.consumptionList)
+                      .toList(),
+                  450),
             ),
           )
         ],
