@@ -7,7 +7,7 @@ final GlobalKey<NavigatorState> secondTabNavKey = GlobalKey<NavigatorState>();
 final GlobalKey<NavigatorState> thirdTabNavKey = GlobalKey<NavigatorState>();
 final GlobalKey<NavigatorState> fourthTabNavKey = GlobalKey<NavigatorState>();
 
-const api_base_url = 'https://1cc0-2804-431-cfd4-3c02-e1e2-ab04-caf9-aed1.ngrok.io';
+const api_base_url = 'http://3579-2804-431-cfd4-3c02-e1e2-ab04-caf9-aed1.ngrok.io';
 
 void main() {
   runApp(MyApp());

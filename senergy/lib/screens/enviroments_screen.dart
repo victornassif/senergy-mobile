@@ -34,7 +34,7 @@ class _EnviromentScreenState extends State<EnviromentScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
-      appBar: CustomAppBar(_handleRefresh),
+      appBar: CustomAppBar(_handleRefresh,'Ambientes'),
       body: StreamBuilder(
           stream: _streamController.stream,
           builder: (ctx, snp) {

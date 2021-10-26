@@ -36,7 +36,7 @@ class _StatsScreenState extends State<StatsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
-      appBar: CustomAppBar(_handleRefresh),
+      appBar: CustomAppBar(_handleRefresh,'Dashboard'),
       body: StreamBuilder(
           stream: _streamController.stream,
           builder: (ctx, snp) {
@@ -60,7 +60,6 @@ class _StatsScreenState extends State<StatsScreen> {
               return CustomScrollView(
                 physics: ClampingScrollPhysics(),
                 slivers: <Widget>[
-                  _buildStatsTabBar(),
                   SliverPadding(
                     padding: const EdgeInsets.symmetric(horizontal: 12.0),
                     sliver: SliverToBoxAdapter(
@@ -73,7 +72,7 @@ class _StatsScreenState extends State<StatsScreen> {
                   SliverPadding(
                     padding: const EdgeInsets.symmetric(horizontal: 0.0),
                     sliver: SliverToBoxAdapter(
-                      child: SpentChart(listConsumption, 450),
+                      child: SpentChart(listConsumption, 500),
                     ),
                   ),
                 ],

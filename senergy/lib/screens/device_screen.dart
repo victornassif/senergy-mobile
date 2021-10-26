@@ -32,7 +32,7 @@ class _DeviceScreenState extends State<DeviceScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
-      appBar: CustomAppBar(_handleRefresh),
+      appBar: CustomAppBar(_handleRefresh,'Sensores'),
       body: StreamBuilder(
           stream: _streamController.stream,
           builder: (ctx, snp) {

@@ -56,7 +56,7 @@ class StatsGrid extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: Colors.black,
+                color: Colors.black87,
                 fontSize: 18,
               ),
             ),
@@ -75,7 +75,7 @@ class StatsGrid extends StatelessWidget {
                   Text(
                     count,
                     style: TextStyle(
-                      color: Colors.black,
+                      color: colorText,
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
                     ),
@@ -108,7 +108,7 @@ class StatsGrid extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: Colors.black,
+                color: Colors.black87,
                 fontSize: 18,
               ),
             ),

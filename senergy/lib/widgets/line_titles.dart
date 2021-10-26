@@ -14,12 +14,16 @@ class LineTitles {
           fontSize: 12,
         ),
         getTitles: (value) {
-          return value.toStringAsFixed(0);
+          return value.toStringAsFixed(0) + '/10';
         },
       ),
       leftTitles: SideTitles(
         showTitles: true,
         margin: 10,
+        interval: 1,
+        getTitles: (e) {
+          return e.toStringAsFixed(0) + 'R\$';
+        },
         getTextStyles: (value) => const TextStyle(
           color: Colors.grey,
           fontSize: 12,

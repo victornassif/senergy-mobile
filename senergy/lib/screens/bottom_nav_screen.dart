@@ -15,7 +15,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
     StatsScreen(),
     DeviceScreen(),
     EnviromentScreen(),
-    ProfileScreen(),
+    // ProfileScreen(),
   ];
   int _currentIndex = 0;
 
@@ -37,7 +37,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
             [Icons.insert_chart,'Dashboard'],
             [Icons.list_alt_rounded,'Sensores'],
             [Icons.living_outlined,'Ambientes'],
-            [Icons.person,'Perfil']
+            // [Icons.person,'Perfil']
           ]
               .asMap()
               .map(

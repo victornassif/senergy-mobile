@@ -22,14 +22,18 @@ class SpentChart extends StatelessWidget {
         totalValue += element.value;
         totalKw += element.kw;
       });
-      consumptionList.add(Consumption(key, totalValue,totalKw));
+      consumptionList.add(Consumption(key, totalValue, totalKw));
     });
 
-    var spotsFromList = consumptionList.map((e) {
+    var spotsValue = consumptionList.map((e) {
       return FlSpot(double.parse(e.dateTime.day.toString()), e.valueT);
     }).toList();
 
-    var maxSpotY = spotsFromList.map((e) {
+    var spotsKw = consumptionList.map((e) {
+      return FlSpot(double.parse(e.dateTime.day.toString()), e.kw);
+    }).toList();
+
+    var maxSpotY = spotsValue.map((e) {
       return e.y;
     }).reduce(max);
 
@@ -62,19 +66,27 @@ class SpentChart extends StatelessWidget {
               LineChartData(
                 gridData: FlGridData(
                   show: true,
-                  horizontalInterval: 2,
+                  horizontalInterval: 20,
+                  verticalInterval: 50,
                   getDrawingHorizontalLine: (value) {
-                    return FlLine(color: Colors.grey.shade200);
+                    return FlLine(color: Colors.grey.shade100);
                   },
                 ),
-                maxX: 30,
-                minX: 18,
-                maxY: maxSpotY + maxSpotY * 0.7,
+                maxX: 26,
+                minX: 19,
+                maxY: maxSpotY + maxSpotY * 0.2, //maxSpotY + maxSpotY * 0.7,
+                minY: 0, //maxSpotY + maxSpotY * 0.7,
                 titlesData: LineTitles.getTitleData(),
                 borderData: FlBorderData(show: true, border: Border()),
+                lineTouchData: LineTouchData(
+                  touchTooltipData: LineTouchTooltipData(
+                    fitInsideHorizontally: true,
+                    tooltipBgColor: Color(0xff838383),
+                  ),
+                ),
                 lineBarsData: [
                   LineChartBarData(
-                    spots: spotsFromList,
+                    spots: spotsValue,
                     isCurved: true,
                     colors: [
                       Theme.of(context).accentColor,
@@ -99,6 +111,22 @@ class SpentChart extends StatelessWidget {
                       );
                     }),
                   ),
+                  // LineChartBarData(
+                  //   spots: spotsKw,
+                  //   isCurved: true,
+                  //   colors: [
+                  //     // Theme.of(context).primaryColor,
+                  //     Color(0xff838383)
+                  //   ],
+                  //   barWidth: 3,
+                  //   dotData: FlDotData(getDotPainter: (spot, value, line, i) {
+                  //     return FlDotCirclePainter(
+                  //       color: Colors.white,
+                  //       strokeColor: Color(0xff838383),
+                  //       strokeWidth: 3,
+                  //     );
+                  //   }),
+                  // ),
                 ],
               ),
             ),
