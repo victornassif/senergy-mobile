@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
 class StatsGrid extends StatelessWidget {
+  double totalSpent;
+  double totalKw;
+
+  StatsGrid({this.totalSpent, this.totalKw});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -11,14 +16,14 @@ class StatsGrid extends StatelessWidget {
             child: Row(
               children: <Widget>[
                 _buildStatCard(
-                  '12,73',
+                  totalSpent.toStringAsFixed(2),
                   'Gasto em reais',
                   'R\$',
                   Colors.white,
                   Theme.of(context).primaryColor,
                 ),
                 _buildStatCardkwh(
-                  '120',
+                  totalKw.toStringAsFixed(0),
                   'Gasto em kWh',
                   'kWh',
                   Colors.white,
@@ -70,7 +75,7 @@ class StatsGrid extends StatelessWidget {
                   Text(
                     count,
                     style: TextStyle(
-                      color:  Colors.black,
+                      color: Colors.black,
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
                     ),

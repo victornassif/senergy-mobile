@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
+  Function syncFun;
+  CustomAppBar(this.syncFun);
+
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -12,9 +15,9 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
       ),
       actions: <Widget>[
         IconButton(
-          icon: const Icon(Icons.search),
+          icon: const Icon(Icons.sync),
           iconSize: 28.0,
-          onPressed: () {},
+          onPressed: syncFun,
         ),
       ],
     );

@@ -12,9 +12,10 @@ class EnviromentListTile {
           Navigator.push(
               context,
               new MaterialPageRoute(
-                  builder: (BuildContext context) => new EnviromentDetailsScreen(enviromentData)));
+                  builder: (BuildContext context) =>
+                      new EnviromentDetailsScreen(enviromentData)));
         },
         leading: Icon(Icons.house),
-        trailing: Text(enviromentData.value.toString() + ' kWh'),
+        trailing: Text(enviromentData.value.toStringAsFixed(0) + ' kWh'),
       );
 }

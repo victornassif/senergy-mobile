@@ -6,7 +6,7 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
-      appBar: CustomAppBar(),
+      appBar: CustomAppBar(null),
       body: CustomScrollView(
         physics: ClampingScrollPhysics(),
         slivers: <Widget>[

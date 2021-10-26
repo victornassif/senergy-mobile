@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:senergy/config/theme.dart';
 import 'package:senergy/controller/enviroment_controller.dart';
-import 'package:senergy/data/data.dart';
 import 'package:senergy/models/enviroment.dart';
 import 'package:senergy/widgets/custom_app_bar.dart';
 import 'package:senergy/widgets/enviroment_list_tile.dart';
@@ -13,9 +13,6 @@ class EnviromentScreen extends StatefulWidget {
 }
 
 class _EnviromentScreenState extends State<EnviromentScreen> {
-  final List<Enviroment> enviromentsData =
-      jsonEnviroment.map((e) => Enviroment.fromJson(e)).toList();
-
   Future<Null> _handleRefresh() async {
     await getData();
   }
@@ -37,18 +34,18 @@ class _EnviromentScreenState extends State<EnviromentScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
-      appBar: CustomAppBar(),
+      appBar: CustomAppBar(_handleRefresh),
       body: StreamBuilder(
           stream: _streamController.stream,
           builder: (ctx, snp) {
             if (snp.hasData) {
               return ListView.builder(
-                itemCount: enviromentsData.length,
+                itemCount: snp.data.length,
                 itemBuilder: (context, index) {
                   return Card(
                     child: EnviromentListTile.getListTile(
                       context,
-                      enviromentsData[index],
+                      snp.data[index],
                     ),
                   );
                 },
@@ -56,7 +53,8 @@ class _EnviromentScreenState extends State<EnviromentScreen> {
             } else {
               return Center(
                 child: CircularProgressIndicator(
-                  backgroundColor: Colors.blue[100],
+                  backgroundColor: Colors.grey,
+                  color: Theme.of(context).accentColor,
                 ),
               );
             }

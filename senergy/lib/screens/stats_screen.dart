@@ -1,8 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:senergy/config/styles.dart';
-import 'package:senergy/data/data.dart';
+import 'package:senergy/controller/enviroment_controller.dart';
 import 'package:senergy/models/consumption.dart';
-import 'package:senergy/models/device.dart';
 import 'package:senergy/models/enviroment.dart';
 import 'package:senergy/widgets/custom_app_bar.dart';
 import 'package:senergy/widgets/spend_chart.dart';
@@ -14,37 +15,77 @@ class StatsScreen extends StatefulWidget {
 }
 
 class _StatsScreenState extends State<StatsScreen> {
-  List<Consumption> spentList = jsonEnviroment
-      .map((e) => Enviroment.fromJson(e))
-      .toList()
-      .expand((element) => element.devices)
-      .toList()
-      .expand((element) => element.consumptionList)
-      .toList();
+  @override
+  void initState() {
+    getData();
+    super.initState();
+  }
+
+  Future<Null> _handleRefresh() async {
+    await getData();
+  }
+
+  getData() async {
+    var list = await EnviromentController.getEnviroments();
+    _streamController.add(list);
+  }
+
+  final _streamController = StreamController<List<Enviroment>>.broadcast();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
-      appBar: CustomAppBar(),
-      body: CustomScrollView(
-        physics: ClampingScrollPhysics(),
-        slivers: <Widget>[
-          _buildStatsTabBar(),
-          SliverPadding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0),
-            sliver: SliverToBoxAdapter(
-              child: StatsGrid(),
-            ),
-          ),
-          SliverPadding(
-            padding: const EdgeInsets.symmetric(horizontal: 0.0),
-            sliver: SliverToBoxAdapter(
-              child: SpentChart(spentList, 450),
-            ),
-          ),
-        ],
-      ),
+      appBar: CustomAppBar(_handleRefresh),
+      body: StreamBuilder(
+          stream: _streamController.stream,
+          builder: (ctx, snp) {
+            if (snp.hasData) {
+              List<Enviroment> enviroments = snp.data;
+              List<Consumption> listConsumption = [];
+
+              enviroments.forEach((e) {
+                e.devices.forEach((element) {
+                  listConsumption.addAll(element.consumptionList);
+                });
+              });
+
+              double totalKw = listConsumption
+                  .map((Consumption e) => e.kw)
+                  .fold(0, (previousValue, element) => element + previousValue);
+              double totalSpent = listConsumption
+                  .map((Consumption e) => e.value)
+                  .fold(0, (previousValue, element) => element + previousValue);
+
+              return CustomScrollView(
+                physics: ClampingScrollPhysics(),
+                slivers: <Widget>[
+                  _buildStatsTabBar(),
+                  SliverPadding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                    sliver: SliverToBoxAdapter(
+                      child: StatsGrid(
+                        totalSpent: totalSpent,
+                        totalKw: totalKw,
+                      ),
+                    ),
+                  ),
+                  SliverPadding(
+                    padding: const EdgeInsets.symmetric(horizontal: 0.0),
+                    sliver: SliverToBoxAdapter(
+                      child: SpentChart(listConsumption, 450),
+                    ),
+                  ),
+                ],
+              );
+            } else {
+              return Center(
+                child: CircularProgressIndicator(
+                  backgroundColor: Colors.blue[100],
+                ),
+              );
+            }
+          }),
     );
   }
 

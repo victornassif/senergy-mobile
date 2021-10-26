@@ -82,7 +82,7 @@ class EnviromentDetailsScreen extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      height: 100,
+                      height: 250,
                       width: widthScreen,
                       child: ListView.builder(
                         itemCount: enviroment.devices.length,

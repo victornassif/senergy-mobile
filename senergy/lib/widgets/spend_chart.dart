@@ -17,10 +17,12 @@ class SpentChart extends StatelessWidget {
 
     groupBy(energySpent, (Consumption c) => c.dateTime).forEach((key, value) {
       double totalValue = 0;
+      double totalKw = 0;
       value.forEach((element) {
         totalValue += element.value;
+        totalKw += element.kw;
       });
-      consumptionList.add(Consumption(key, totalValue));
+      consumptionList.add(Consumption(key, totalValue,totalKw));
     });
 
     var spotsFromList = consumptionList.map((e) {
